@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Mobile App</title>
+    <style>
+            /* Global style */
+        * {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+            /* Layout style */
+        .hBox {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+        }
+
+        .vBox {
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+
+
+        }
+
+        .maxSize {
+            -webkit-box-flex: 1;
+            -moz-box-flex:  1;
+            -webkit-flex:  1;
+            -ms-flex:  1;
+            flex:  1;
+        }
+
+        .height100{
+            height: 100%;
+        }
+
+        .width100{
+            width: 100%;
+        }
+
+
+            /* App specific style */
+        .header, .footer{
+            background-color: skyblue;
+        }
+
+        .header {
+            border-bottom: 3px solid #0851ad;
+        }
+
+        .flatButton {
+            height: 55px;
+            line-height: 55px;
+            font-size: 2em;
+            text-align: center;
+            vertical-align: middle;
+            border: 2px solid #048bf4;
+        }
+
+        .titleStyle{
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="vBox width100 height100">
+    <div class="hBox header">
+        <div><img style="padding: 5px 0 0 5px" src="images/a-icon1.png"></div>
+        <div class="maxSize titleStyle"><span class="">Hello World</span></div>
+        <div><img style="padding: 5px 5px 0 0" src="images/a-icon1.png"></div>
+    </div>
+    <div class="maxSize hBox">
+
+        <div class="vBox maxSize">
+            <div class="maxSize" style="background-color: #59e738">A</div>
+            <div class="maxSize">B</div>
+        </div>
+
+        <div class="vBox maxSize">
+            <div class="maxSize">C</div>
+            <div class="maxSize" style="background-color: #59e738">D</div>
+        </div>
+
+
+    </div>
+    <div class="hBox footer">
+        <div class="maxSize"><div class="flatButton width100">AAA</div></div>
+        <div class="maxSize"><div class="flatButton width100">BBB</div></div>
+        <div class="maxSize"><div class="flatButton width100">CCC</div></div>
+    </div>
+</div>
+
+</body>
+</html>
