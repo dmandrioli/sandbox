@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>ScrollableView demo</title>
+
+<script type="text/javascript" src="../deviceTheme.js"></script>
+<script type="text/javascript" src="../../../dojo/dojo.js"
+        data-dojo-config="async: true, parseOnLoad: true, mblAlwaysHideAddressBar: true"></script>
+
+<!--Include FT Scroller source (can be included at any point as long as it's loaded before being used) -->
+<!--
+<script src='../../../ftscroller/ftscroller.js'></script>
+-->
+
+<script type="text/javascript">
+    var viewRegistry;
+    var onRadioButtonChange = function(){
+        var checked = this.get('checked');
+        var value, enclosingScrollable;
+        if(checked){
+            value = this.get("value");
+            enclosingScrollable = viewRegistry.getEnclosingScrollable(this.domNode);
+            console.log("set preventDefaultInMove=" + value + " on scrollable id: " +
+                    enclosingScrollable.id);
+            enclosingScrollable.preventDefaultInMove = value;
+        }
+    };
+    var onToggleButtonChange = function(checked){
+        var value, enclosingScrollable;
+        var enclosingScrollable = viewRegistry.getEnclosingScrollable(this.domNode);
+        enclosingScrollable.withForceRendering = checked;
+        console.log("set withForceRendering=" + checked + " on scrollable id: " +
+                enclosingScrollable.id);
+    };
+    require([
+        "dojo/ready",
+        "dojo/sniff",
+        "dijit/registry",
+        "dojox/mobile/viewRegistry",
+        "dojox/mobile/ListItem",
+        "dojox/mobile/parser",
+        "dojox/mobile",
+        "dojox/mobile/compat",
+        "dojox/mobile/ScrollableView",
+        "dojox/mobile/CheckBox",
+        "dojox/mobile/ComboBox",
+        "dojox/mobile/RadioButton",
+        "dojox/mobile/TabBar"
+    ], function(ready, has, registry, viewReg, ListItem){
+        viewRegistry = viewReg;
+        ready(function(){
+            // Display the default scrollType
+            // scrollType: Number
+            //		- 1: use -webkit-transform:translate3d(x,y,z) style, use -webkit-animation for slide anim
+            //		- 2: use top/left style,
+            //		- 3: use -webkit-transform:translate3d(x,y,z) style, use -webkit-transition for slide anim
+            //		- 0: use default value (2 in case of Android < 3, 3 if iOS6, otherwise 1)
+            var st = 1;
+            if(has('android') < 3){
+                st = 2;
+            }else if(has("ios") >= 6){
+                st = 3;
+            }
+            alert("Default scrollType: " + st);
+
+            var ftscrollable = document.getElementById('ftscrollable');
+            var scroller;
+            if(ftscrollable){
+                scroll = new FTScroller(ftscrollable, {
+                    scrollingX: false
+                });
+            }
+            ftscrollable = document.getElementById('ftscrollable2');
+            if(ftscrollable){
+                scroller = new FTScroller(ftscrollable, {
+                    scrollingX: false
+                });
+            }
+
+            var item;
+            var i;
+            var w = registry.byId("st0");
+            var variableHeight = true;
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 0)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("st0withoutForceRendering");
+            var variableHeight = true;
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 0 wfr)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("st1");
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 1)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("st2");
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 2)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("st3");
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 3)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("st3withoutForceRendering");
+            var variableHeight = true;
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    item = new ListItem({label:"Item " + i + " (scrollType 3 wfr)", variableHeight: variableHeight});
+                    w.addChild(item);
+                }
+            }
+            w = registry.byId("ftscrollablelist");
+            if(w){
+                for(i = 1; i <= 300; i++){
+                    // item = new ListItem({label:"Item " + i + " (ftscrollablelist)", variableHeight: variableHeight});
+                    item = new ListItem({label:"Item " + i + " (ftscrollablelist)"});
+                    w.addChild(item);
+                }
+            }
+        });
+    });
+</script>
+
+<style>
+    html,body{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+        /* Set the size of the scroller.  Visible border to make demo easier to understand */
+    #ftscrollable { width: 100%; height: 100%; border: 1px solid #555; overflow: hidden }
+    #ftscrollable2 { width: 100%; height: 50px; border: 1px solid #555; overflow: hidden }
+    #group1 { width: 100%; height: 100%; border: 1px solid #555; overflow: hidden }
+
+        /*
+        mblListItem {
+            outline: none;
+        }
+        */
+    .list1 li{
+        border-style: solid;
+        border-width: 1px 0px 1px 0px;
+        border-top-color: #BABABC;
+        border-bottom-color: #89898C;
+        background-color: #ACACAF;
+        line-height: 0px;
+    }
+    .list1 li table{
+        line-height: normal;
+    }
+    .list1 li:nth-child(even){
+        background-color: #97979B;
+    }
+    #list2 li:nth-child(even){
+        background-color: #eeeeee;
+    }
+    #categ1 {
+        font-size: 18px;
+    }
+    #categ1 li{
+        line-height: 70px;
+    }
+    .lnk {
+        font-size: 14px;
+        color: #0B5199;
+        text-decoration: none;
+    }
+    .content {
+        padding:0px 10px;
+        background-color: white;
+    }
+    p {
+        font-family: Helvetica;
+        font-size: 12px;
+    }
+    .title {
+        color: blue;
+        margin-bottom: 4px;
+    }
+    .subtitle {
+        font-style: italic;
+        color: gray;
+        margin: 0px;
+        margin-bottom: 4px;
+    }
+    .subsubtitle {
+        margin: 16px 0px 0px 0px;
+    }
+    .lst {
+        margin: 0px;
+        padding: 0px 14px;
+    }
+    .lst li {
+        font-family: Helvetica;
+        font-size: 12px;
+        margin: 0px;
+        list-style-type: square;
+    }
+    .iphone_theme .mblTabBarSegmentedControl .mblTabBarButtonIconArea {
+        display: none;
+    }
+</style>
+</head>
+<body style="visibility:hidden;">
+<!--
+<div height="50px" id='ftscrollable2'>
+        1<br/>
+        2<br/>
+        3<br/>
+        4<br/>
+        5<br/>
+        6<br/>
+        7<br/>
+        8<br/>
+        9<br/>
+        10<br/>
+</div>
+-->
+<!-- <div id="group1" data-dojo-type="dojox.mobile.View" data-dojo-props='keepScrollPos:false'> --> <!-- keepScrollPos=false is to improve performance -->
+<!--
+<div id="group1" data-dojo-type="dojox.mobile.View">
+    <div id='ftscrollable'>
+        <ul data-dojo-type="dojox.mobile.EdgeToEdgeList" class="list1" id="ftscrollablelist">
+        </ul>
+    </div>
+</div>
+-->
+
+<div id="svST0" data-dojo-type="dojox.mobile.ScrollableView" selected="true">
+    <!--
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props='fixed:"top"'>ST0</h1>
+    -->
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props="fixed: 'top'">
+        <button data-dojo-type="dojox/mobile/ToggleButton"
+                data-dojo-props="onChange: onToggleButtonChange"
+                checked="true" style="float:right;">FRend</button>
+        pd:
+        <input type="radio" id="rb30" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="none" checked="true" >
+        <label for="rb30">No</label>
+        <input type="radio" id="rb20" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="firstTouchMove">
+        <label for="rb20">1st</label>
+        <input type="radio" id="rb10" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="allTouchMove">
+        <label for="rb10">All</label>
+    </h1>
+    <ul data-dojo-type="dojox.mobile.EdgeToEdgeList" class="list1" id="st0">
+    </ul>
+</div>
+
+<div id="svST1" data-dojo-type="dojox.mobile.ScrollableView"
+     data-dojo-props="scrollType: 1">
+    <!--
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props='fixed:"top"'>ST1</h1>
+    -->
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props="fixed: 'top'">
+        <button data-dojo-type="dojox/mobile/ToggleButton"
+                data-dojo-props="onChange: onToggleButtonChange"
+                checked="true" style="float:right;">FRend</button>
+        pd:
+        <input type="radio" id="rb31" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="none" checked="true" >
+        <label for="rb31">No</label>
+        <input type="radio" id="rb21" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="firstTouchMove">
+        <label for="rb21">1st</label>
+        <input type="radio" id="rb11" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="allTouchMove">
+        <label for="rb11">All</label>
+    </h1>
+    <ul data-dojo-type="dojox.mobile.EdgeToEdgeList" class="list1" id="st1">
+    </ul>
+</div>
+<div id="svST2" data-dojo-type="dojox.mobile.ScrollableView"
+     data-dojo-props="scrollType: 2">
+    <!--
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props='fixed:"top"'>ST2</h1>
+    -->
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props="fixed: 'top'">
+        <button data-dojo-type="dojox/mobile/ToggleButton"
+                data-dojo-props="onChange: onToggleButtonChange"
+                checked="true" style="float:right;">FRend</button>
+        pd:
+        <input type="radio" id="rb32" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="none" checked="true" >
+        <label for="rb32">No</label>
+        <input type="radio" id="rb22" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="firstTouchMove">
+        <label for="rb22">1st</label>
+        <input type="radio" id="rb12" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="allTouchMove">
+        <label for="rb12">All</label>
+    </h1>
+    <ul data-dojo-type="dojox.mobile.EdgeToEdgeList" class="list1" id="st2">
+    </ul>
+</div>
+<div id="svST3" data-dojo-type="dojox.mobile.ScrollableView"
+     data-dojo-props="scrollType: 3">
+    <!-- <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props='fixed:"top"'>ST3</h1> -->
+    <h1 data-dojo-type="dojox.mobile.Heading" data-dojo-props="fixed: 'top'">
+        <button data-dojo-type="dojox/mobile/ToggleButton"
+                data-dojo-props="onChange: onToggleButtonChange"
+                checked="true" style="float:right;">FRend</button>
+        pd:
+        <input type="radio" id="rb33" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="none" checked="true" >
+        <label for="rb33">No</label>
+        <input type="radio" id="rb23" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="firstTouchMove">
+        <label for="rb23">1st</label>
+        <input type="radio" id="rb13" data-dojo-type="dojox/mobile/RadioButton"
+               data-dojo-props="onChange: onRadioButtonChange"
+               name="mobileRadio" value="allTouchMove">
+        <label for="rb13">All</label>
+    </h1>
+    <ul data-dojo-type="dojox.mobile.EdgeToEdgeList" class="list1" id="st3">
+    </ul>
+</div>
+
+<ul data-dojo-type="dojox.mobile.TabBar" data-dojo-props='fixed:"bottom"' style="border-bottom:none;">
+    <!--
+    <li data-dojo-type="dojox.mobile.TabBarButton"
+        data-dojo-props='icon1:"images/tab-icon-16.png", icon2:"images/tab-icon-16h.png", moveTo:"group1"'>FTS</li>
+    -->
+    <li data-dojo-type="dojox.mobile.TabBarButton"
+        data-dojo-props='icon1:"images/tab-icon-15.png", icon2:"images/tab-icon-15h.png", selected:true, moveTo:"svST0"'>ST0</li>
+    <li data-dojo-type="dojox.mobile.TabBarButton"
+        data-dojo-props='icon1:"images/tab-icon-15.png", icon2:"images/tab-icon-15h.png", moveTo:"svST1"'>ST1</li>
+    <li data-dojo-type="dojox.mobile.TabBarButton"
+        data-dojo-props='icon1:"images/tab-icon-15.png", icon2:"images/tab-icon-15h.png", moveTo:"svST2"'>ST2</li>
+    <li data-dojo-type="dojox.mobile.TabBarButton"
+        data-dojo-props='icon1:"images/tab-icon-15.png", icon2:"images/tab-icon-15h.png", moveTo:"svST3"'>ST3</li>
+</ul>
+</body>
+</html>
