@@ -47,6 +47,9 @@ i[class*="icon"]{
     padding: 0 0.3em 0 0.3em;
 }
 
+i[class*="icon"]:active{
+    color: gold;
+}
 button{
     border: none;
     background: none;
