@@ -10,23 +10,46 @@ html, body {
 }
 
 .headerStyle, .footerStyle{
-    background-color: dodgerblue;
+    background-color: #1AA1E1;
+    color: white;
 }
 
 .headerStyle {
-    border-bottom: 3px solid skyblue;
+    border-bottom: 2px solid black;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 }
 
+.footerStyle {
+    border-top: 2px solid black;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
 .buttonStyle {
     height: 55px;
     line-height: 55px;
-    font-size: 2em;
+    font-size: 1.5em;
     text-align: center;
     vertical-align: middle;
-    border: 2px solid midnightblue;
+
 }
 
 .titleStyle{
-    font-size: 2.5em;
+    font-size: 1.5em;
     text-align: center;
+    padding-top: 0.2em;
 }
+
+
+i[class*="icon"]{
+    font-size: 2em;
+    color: white;
+    padding: 0 0.3em 0 0.3em;
+}
+
+button{
+    border: none;
+    background: none;
+}
+
+

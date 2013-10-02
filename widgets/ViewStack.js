@@ -41,7 +41,7 @@ define([
                 }
                 if(this._visibleChild){
                     var widget = this._getWidget(widgetOrId);
-                    if(widget){
+                    if(widget && this._visibleChild != widget){
                         if (!props){
                             props = {transition: "slide", direction: "end"};
                         }
@@ -134,6 +134,7 @@ define([
 
             _setVisibility: function(node, val){
                 node.style.visibility = val ? "visible" : "hidden";
+                node.style.display = val ? "" : "none";
             },
 
             _afterTransitionHandle: function(event){
