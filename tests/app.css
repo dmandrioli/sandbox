@@ -1,14 +1,3 @@
-* {
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-}
-
 .headerStyle, .footerStyle{
     background-color: #1AA1E1;
     color: white;
