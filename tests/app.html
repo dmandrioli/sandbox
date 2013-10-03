@@ -6,8 +6,10 @@
           content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <title>Mobile Application</title>
+
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../widgets/css/ViewStack.css">
-    <link rel="stylesheet" href="../widgets/css/BasicLayout.css">
     <link rel="stylesheet" href="../widgets/css/SidePane.css">
     <link rel="stylesheet" href="app.css">
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
@@ -25,7 +27,6 @@
             "dojox/mobile/parser",
             "dojox/mobile/Pane",
             "widgets/ViewStack",
-            "widgets/BasicLayout",
             "widgets/SidePane",
             "dojox/mobile/ScrollableView"
         ], function(mobile, parser, Pane){});
@@ -34,21 +35,21 @@
 <body style="visibility:hidden;">
 <!-- A SidePane for the left menu -->
 <div data-dojo-type="widgets/SidePane" data-dojo-props="mode:'reveal', position:'start'" data-dojo-id="leftPane">
-    <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'vertical'" class="height100">
-        <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'horizontal'" class="headerStyle">
+    <div class="vertical-layout height100">
+        <div class="horizontal-layout headerStyle">
             <div><button onclick="leftPane.close()"><i class="icon-chevron-sign-left"></i></button></div>
             <div class="fill titleStyle">Menu</div>
             <div><button onclick="leftStack.show('settings', {direction:'start'})"><i class="icon-cog"></i></button></div>
         </div>
         <div data-dojo-type="widgets/ViewStack" data-dojo-id="leftStack" class="width100 fill" style="background-color: white">
-            <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'vertical'" id="menu">
+            <div class="vertical-layout" id="menu" data-dojo-type="dojox/mobile/Pane">
                 <li class="mblListItem" onClick="vs.show('aaa')">AAA</li>
                 <li class="mblListItem" onClick="vs.show('bbb')">BBB</li>
                 <li class="mblListItem" onClick="vs.show('ccc')">CCC</li>
                 <li class="mblListItem" onClick="vs.show('ddd')">DDD</li>
             </div>
 
-            <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'horizontal'" id="settings">
+            <div class="horizontal-layout" id="settings" data-dojo-type="dojox/mobile/Pane">
                 <button class="fill" onclick="leftStack.show('menu', {direction:'end'})"><i class="icon-reply" style="color: black"></i>Back</button>
             </div>
         </div>
@@ -56,9 +57,9 @@
 </div>
 </div>
 <!-- Main application -->
-<div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'vertical'" class="width100 height100">
+<div class="vertical-layout width100 height100">
     <!-- Header -->
-    <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'horizontal'" class="headerStyle">
+    <div class="horizontal-layout headerStyle">
         <div><button onclick="leftPane.open()"><i class="icon-reorder"></i></button></div>
         <div class="fill titleStyle">Mobile App</div>
         <div><button><i class="icon-unlock"></i></button></div>
@@ -71,7 +72,7 @@
         <div style="background-color: white;" id="bbb" data-dojo-type="dojox/mobile/Pane">
             <!-- Test with a ScrollableView -->
             <div data-dojo-type="dojox/mobile/ScrollableView">
-                <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'vertical'">
+                <div class="vertical-layout">
                     <li style="min-height:3em;" class="mblListItem" onClick="vs.show('aaa')">AAA</li>
                     <li style="min-height:3em;" class="mblListItem" onClick="vs.show('bbb')">BBB</li>
                     <li style="min-height:3em;" class="mblListItem" onClick="vs.show('ccc')">CCC</li>
@@ -103,7 +104,7 @@
         </div>
     </div>
     <!-- Footer -->
-    <div data-dojo-type="widgets/BasicLayout" data-dojo-props="direction: 'horizontal'" class="footerStyle">
+    <div class="horizontal-layout footerStyle">
         <div class="fill"><button onclick="vs.show('aaa')"><i class="icon-comment"></i></button></div>
         <div class="fill"><button onclick="vs.show('bbb')"><i class="icon-list"></i></button></div>
         <div class="fill"><button onclick="vs.show('ccc')"><i class="icon-shopping-cart"></i></button></div>
