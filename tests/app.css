@@ -14,6 +14,12 @@
     padding-top: 0.3em;
     padding-bottom: 0.3em;
 }
+
+button{
+	border: none;
+	background: none;
+}
+
 .buttonStyle {
     height: 55px;
     line-height: 55px;
@@ -27,6 +33,11 @@
     font-size: 1.5em;
     text-align: center;
     padding-top: 0.2em;
+
+	/* One line title with ellipsis if needed */
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow-x: hidden;
 }
 
 
@@ -39,9 +50,7 @@ i[class*="icon"]{
 i[class*="icon"]:active{
     color: gold;
 }
-button{
-    border: none;
-    background: none;
+
+.scrollableText {
+	overflow: auto;
 }
-
-
