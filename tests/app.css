@@ -1,15 +1,15 @@
-.headerStyle, .footerStyle{
+.pageHeader, .pageFooter{
     background-color: #1AA1E1;
     color: white;
 }
 
-.headerStyle {
+.pageHeader {
     border-bottom: 2px solid black;
     padding-top: 0.3em;
     padding-bottom: 0.3em;
 }
 
-.footerStyle {
+.pageFooter {
     border-top: 2px solid black;
     padding-top: 0.3em;
     padding-bottom: 0.3em;

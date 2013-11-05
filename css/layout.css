@@ -1,32 +1,83 @@
-.horizontal-layout {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+/*.mblHBasicLayout {*/
+/*display: -webkit-box;*/
+/*display: -moz-box;*/
+/*display: -ms-flexbox;*/
+/*display: -webkit-flex;*/
+/*display: flex;*/
+/*}*/
+/*.mblVBasicLayout {*/
+/*display: -webkit-box;*/
+/*display: -moz-box;*/
+/*display: -ms-flexbox;*/
+/*display: -webkit-flex;*/
+/*display: flex;*/
+/*-webkit-flex-direction: column;*/
+/*-ms-flex-direction: column;*/
+/*-webkit-box-orient: vertical;*/
+/*-moz-box-orient: vertical;*/
+/*-ms-box-orient: vertical;*/
+/*}*/
+
+/*.fill {*/
+/*-webkit-box-flex: 1;*/
+/*-moz-box-flex: 1;*/
+/*-webkit-flex: 1;*/
+/*-ms-flex: 1;*/
+/*flex: 1;*/
+/*}*/
+/*.height100 {*/
+/*height: 100%;*/
+/*}*/
+/*.width100 {*/
+/*width: 100%;*/
+/*}*/
+/* ****************** */
+
+/*.dj_ie .mblHBasicLayout, .dj_ie .mblVBasicLayout {*/
+/*display:table;*/
+/*}*/
+/*.dj_ie .mblHBasicLayout > *, .dj_ie .mblVBasicLayout > * {*/
+/*display:table-row;*/
+/*}*/
+
+/*.dj_ie .mblHBasicLayout > * > *, .dj_ie .mblVBasicLayout > * > * {*/
+/*display:table-cell;*/
+/*}*/
+
+/*.dj_ie .fill {*/
+/*width: 100%;*/
+/*height: 100%;*/
+/*}*/
+
+table, tr, td {
+	padding: 0 !important;
+	margin: 0 !important;
+
 }
-.vertical-layout {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -ms-box-orient: vertical;
+.mblHBasicLayout > *, .mblVBasicLayout > * {
+	display:table;
 }
-.fill {
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+.mblHBasicLayout > * > *, .mblVBasicLayout > * > *{
+	display:table-row;
 }
-.height100 {
-    height: 100%;
+
+.mblHBasicLayout > * > * > *, .mblVBasicLayout > * > * > * {
+	display:table-cell;
 }
-.width100 {
-    width: 100%;
+
+.hfill {
+	width: 100%;
+	/*-webkit-box-flex: 1;*/
+	/*-moz-box-flex: 1;*/
+	/*-webkit-flex: 1;*/
+	/*-ms-flex: 1;*/
+	/*flex: 1;*/
+}
+.vfill {
+	height: 100%;
+	/*-webkit-box-flex: 1;*/
+	/*-moz-box-flex: 1;*/
+	/*-webkit-flex: 1;*/
+	/*-ms-flex: 1;*/
+	/*flex: 1;*/
 }
